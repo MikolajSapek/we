@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Auto Estate Generator Project - Mikolaj Pawel Sapek Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="../index.html" class="logo">Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="../index.html">Projects</a></li>
+							<li class="active"><a href="auto-estate.html">Auto Estate Generator</a></li>
+							<li><a href="../aboutme.html">About Me</a></li>
+							<li><a href="../cv.html">CV</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Auto Estate Generator<br />
+									Project</h1>
+									<p>Automatic n8n pipeline that retrieves content from emails and industry links, decodes DOCX/HTML attachments, translates and cleans texts using OpenAI models, then creates ready-formatted posts/records in Notion for Estate FM.</p>
+								</header>
+								<div class="image main"><img src="../images/1599457609166.png" alt="Auto Estate Generator Project" style="max-width: 50%; margin: 0 auto; display: block;" /></div>
+								
+								<h2>Overview</h2>
+								<p>An automatic n8n pipeline that retrieves content from emails and industry links, decodes DOCX/HTML attachments, translates and cleans texts using OpenAI models, then creates ready-formatted posts/records in Notion for Estate FM.</p>
+								<p>The workflow starts with Gmail Trigger, fetches full email content with attachments, detects article links, resolves tracking URLs (e.g., ses.prsts.de/CL0/), and fetches clean innerText through an API fetcher to obtain high-quality source material. Two LLM paths then translate and organize the text (a "clean summary" version and a "LinkedIn with emoji" version), after which texts are composed, split into parts, and saved to Notion database as separate properties ContentPart1..4 with title and date preserved.</p>
+								<p>The pipeline also handles DOCX attachments: changes metadata to ZIP, unpacks, extracts document.xml, converts XML paragraphs to clean text, decodes entities, and passes to translation; enabling it to work with both HTML content and office documents.</p>
+								
+								<h2>Technology Stack</h2>
+								<p>The project leverages n8n workflow automation and AI-powered processing:</p>
+								<ul>
+									<li><strong>n8n Workflow Automation:</strong> Gmail Trigger, HTTP Request, Code (Node.js), Merge, Compression, Extract from File, Notion node, LangChain LLM, and Structured Output Parser</li>
+									<li><strong>AI Processing:</strong> OpenAI gpt-4o-mini for PL→EN translation and LinkedIn post formatting in newsroom tone, with structure control through parsers</li>
+									<li><strong>Notion API:</strong> Automatic page creation in database (Title, Date, ContentPart1..4)</li>
+								</ul>
+
+								<h2>Key Features</h2>
+								<ul>
+									<li>Intelligent link detection and cleaning: parsing href/onclick/data-href, filtering tracking domains, decoding ses.prsts.de to destination URL</li>
+									<li>Content extraction: fetching innerText through external fetcher with fallback to full HTML email, plus DOCX→XML→text support</li>
+									<li>Two LLM layers: clean business translation and structured LinkedIn version with emoji, ISO date, and header</li>
+									<li>Notion publication: splitting long text into 2–4 parts and saving properties with metadata</li>
+									<li>Direct DOCX processing from email attachments without manual conversion</li>
+								</ul>
+
+								<h2>DOCX Processing Pipeline</h2>
+								<p>A key innovation of this project is the ability to directly read DOCX files from email attachments:</p>
+								<ol>
+									<li><strong>Extract DOCX from Gmail:</strong> Gmail Trigger captures email with binary attachment (contentType: application/vnd.openxmlformats-officedocument.wordprocessingml.document)</li>
+									<li><strong>Decompress as ZIP:</strong> Compression node extracts DOCX as ZIP archive (archiveFormat=zip)</li>
+									<li><strong>Extract document.xml:</strong> Select word/document.xml file from extracted archive</li>
+									<li><strong>Parse XML to Text:</strong> Extract from File or Code node converts XML paragraphs to clean text, preserving paragraph breaks and decoding entities</li>
+									<li><strong>Process Content:</strong> Cleaned text is passed to LLM translation pipeline and chunked for Notion storage</li>
+								</ol>
+
+								<h2>Code Examples</h2>
+								<p>Key implementation details:</p>
+								
+								<h3>Tracking URL Decoding</h3>
+								<details>
+									<summary style="cursor: pointer; font-weight: bold; margin: 1em 0; padding: 0.5em; background: #f4f4f4; border-radius: 4px;">Click to expand Tracking URL Decoder</summary>
+									<pre style="margin-top: 1em;"><code>let trackingUrl = $json.articleUrl;
+if (trackingUrl.includes('ses.prsts.de/CL0/')) {
+  const parts = trackingUrl.split('/CL0/');
+  if (parts.length > 1) {
+    const encodedPart = parts[1].split('/1/')[0];
+    const directUrl = decodeURIComponent(encodedPart);
+    return [{ json: { articleUrl: directUrl, originalTrackingUrl: trackingUrl, subject: $json.subject, date: $json.date } }];
+  }
+}
+return [{ json: { articleUrl: trackingUrl, subject: $json.subject, date: $json.date } }];</code></pre>
+								</details>
+
+								<h3>DOCX XML to Text Conversion</h3>
+								<details>
+									<summary style="cursor: pointer; font-weight: bold; margin: 1em 0; padding: 0.5em; background: #f4f4f4; border-radius: 4px;">Click to expand DOCX Parser Code</summary>
+									<pre style="margin-top: 1em;"><code>// DOCX Processing: Extract text from word/document.xml
+const { xml2js } = require('xml-js');
+
+function xmlToText(xmlStr) {
+  const js = xml2js(xmlStr, { compact: true, spaces: 0, ignoreComment: true });
+  const body = js['w:document']?.['w:body'];
+  if (!body) return '';
+  
+  const paras = Array.isArray(body['w:p']) ? body['w:p'] : [body['w:p']].filter(Boolean);
+  const lines = [];
+  
+  for (const p of paras) {
+    const runs = p['w:r'] ? (Array.isArray(p['w:r']) ? p['w:r'] : [p['w:r']]) : [];
+    const parts = [];
+    
+    for (const r of runs) {
+      const t = r['w:t']?._text || r['w:t']?.['_cdata'] || '';
+      parts.push(t);
+      if (r['w:br']) parts.push('\n');
+    }
+    
+    lines.push(parts.join('').replace(/\u00A0/g, ' ').trim());
+  }
+  
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n');
+}
+
+// Get XML from binary data
+const bin = $binary.document_xml;
+if (!bin) {
+  return [{ json: { error: 'Missing document.xml' } }];
+}
+
+const xmlStr = Buffer.from(bin.data, 'base64').toString('utf8');
+const text = xmlToText(xmlStr);
+
+return [{ json: { docxText: text } }];</code></pre>
+								</details>
+
+								<h3>Content Chunking for Notion</h3>
+								<details>
+									<summary style="cursor: pointer; font-weight: bold; margin: 1em 0; padding: 0.5em; background: #f4f4f4; border-radius: 4px;">Click to expand Chunking Function</summary>
+									<pre style="margin-top: 1em;"><code>function splitTextIntoChunks(text, chunkSize = 1900) {
+  const chunks = [];
+  for (let i = 0; i < text.length; i += chunkSize) {
+    chunks.push(text.slice(i, i + chunkSize));
+  }
+  return chunks;
+}
+
+const longContent = $json.content || '';
+const chunkSize = 1900;
+const maxParts = 4;
+
+let chunks = splitTextIntoChunks(longContent, chunkSize);
+
+if (chunks.length > maxParts) {
+  const head = chunks.slice(0, maxParts - 1);
+  const tail = chunks.slice(maxParts - 1).join('');
+  chunks = [...head, tail];
+}
+
+return [{ json: { 
+  ContentPart1: chunks[0] || '', 
+  ContentPart2: chunks[1] || '', 
+  ContentPart3: chunks[2] || '', 
+  ContentPart4: chunks[3] || '' 
+} }];</code></pre>
+								</details>
+
+								<h2>Functionality</h2>
+								<p>The pipeline performs the following operations:</p>
+								<ul>
+									<li>Gmail Trigger monitors inbox for new real estate emails</li>
+									<li>Extracts email content, attachments (DOCX/HTML), and embedded links</li>
+									<li>Decodes tracking URLs to direct article links</li>
+									<li>Fetches clean innerText from web pages via API fetcher</li>
+									<li>Processes DOCX attachments: ZIP extraction → document.xml → clean text conversion</li>
+									<li>Two-stage LLM processing: clean translation and LinkedIn-formatted version</li>
+									<li>Chunks content into 2–4 parts and saves to Notion as ContentPart1..4 properties</li>
+								</ul>
+
+								<h2>Challenges & Solutions</h2>
+								<p>Key challenges encountered and solutions implemented:</p>
+								<ul>
+									<li><strong>Different source formats and trackers:</strong> Implemented multi-layer regex patterns to extract URLs and tracker decoder to always reach canonical article</li>
+									<li><strong>Long content and token limits:</strong> Chunking into fixed blocks, then merging into organized ContentPart1..4 sections</li>
+									<li><strong>DOCX documents:</strong> File conversion to ZIP, extraction of document.xml, entity decoding, and paragraph joining to preserve full content</li>
+									<li><strong>Binary file handling:</strong> Proper handling of Gmail binary attachments with correct content type detection</li>
+									<li><strong>XML parsing complexity:</strong> Robust XML-to-text conversion preserving paragraph structure and formatting</li>
+								</ul>
+
+								<h2>Results & Outcomes</h2>
+								<p>The project delivers significant value:</p>
+								<ul>
+									<li>Elimination of manual copying/formatting: ready posts in Notion in English, with preserved facts and readable structure for publication</li>
+									<li>Higher consistency: uniform newsroom style and automatic date normalization (yyyy-mm-dd) in header</li>
+									<li>Resilience to source changes: selectors and regex patterns reduce risk of process interruption with minor HTML changes</li>
+									<li>Seamless DOCX handling: direct processing from email attachments without manual conversion steps</li>
+								</ul>
+
+								<h2>Project Highlights</h2>
+								<ul>
+									<li>Complete path from email with DOCX/HTML attachment to ready, translated post in Notion without manual intervention</li>
+									<li>Advanced link and content processing (tracking decode, innerText extract), minimizing noise and preserving facts</li>
+									<li>Two LLM profiles: "strict translate" and "LinkedIn newsroom", with control through Structured Output Parser</li>
+									<li>Innovative DOCX processing: direct extraction from email attachments using ZIP decompression and XML parsing</li>
+								</ul>
+
+								<h2>Visualizations</h2>
+								<div class="box alt">
+									<div class="row gtr-50 gtr-uniform">
+										<div class="col-12">
+											<h3>n8n Workflow Diagram</h3>
+											<p><em>Complete workflow showing main branches (Gmail, Link Decode, Fetch, LLM, Notion) and DOCX processing pipeline</em></p>
+											<span class="image fit"><img src="../images/Screenshot 2025-11-04 at 21.10.22.png" alt="n8n Workflow Diagram" style="max-width: 70%; margin: 0 auto; display: block;" /></span>
+										</div>
+									</div>
+								</div>
+
+								<ul class="actions special">
+									<li><a href="../index.html" class="button large">Back to Projects</a></li>
+								</ul>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Copenhagen, Denmark<br />
+								</p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">miki.sapek@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							        <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Mikolaj Pawel Sapek</li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
+
+

@@ -11,6 +11,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			section.posts article .image.fit img {
+				width: 100%;
+				height: 300px;
+				object-fit: cover;
+				object-position: center;
+				display: block;
+				margin: 0 auto;
+			}
+			section.posts article .image.fit img[src="images/1599457609166.png"] {
+				object-fit: contain;
+				background-color: #f4f4f4;
+			}
+			article.post.featured .image.main img {
+				margin: 0 auto;
+				display: block;
+			}
+		</style>
 	</head>
 	<body class="is-preload">
 
@@ -37,8 +55,8 @@
 					<nav id="nav">
 						<ul class="links">
 							<li class="active"><a href="index.html">Projects</a></li>
-							<li><a href="generic.html">Generic Page</a></li>
-							<li><a href="elements.html">Elements Reference</a></li>
+							<li><a href="aboutme.html">About Me</a></li>
+							<li><a href="cv.html">CV</a></li>
 						</ul>
 						<ul class="icons">
 							<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class= "label">linkedinS</span></a></li>
@@ -54,13 +72,13 @@
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<h2><a href="https://mikolajsapek.github.io/MikolajSapek/Bachelor%20Thesis/">Bachelor Thesis<br />
+									<h2><a href="Projects/bachelor-thesis.html">Bachelor Thesis<br />
 									</a></h2>
 									<p>The Impact of Third-Force Candidates on Voter Turnout in the 2020 and 2015  Polish Presidential Election and a Forecast for 2025</p>
 								</header>
-								<a href="https://mikolajsapek.github.io/MikolajSapek/Bachelor%20Thesis/" class="image main"><img src="images/pic01.jpg" alt="" /></a>
+								<a href="Projects/bachelor-thesis.html" class="image main"><img src="images/2025_Polish_presidential_election_-_1_rund_in_gminas.png" alt="Bachelor Thesis Project" style="max-width: 70%; margin: 0 auto; display: block;" /></a>
 								<ul class="actions special">
-									<li><a href="https://mikolajsapek.github.io/MikolajSapek/Bachelor%20Thesis/" class="button large">View project</a></li>
+									<li><a href="Projects/bachelor-thesis.html" class="button large">View project</a></li>
 								</ul>
 							</article>
 
@@ -68,46 +86,46 @@
 							<section class="posts">
 								<article>
 									<header>
-										<h2><a href="projekty/traffic-signs.html">Traffic Sign Recognition<br />
+										<h2><a href="Projects/traffic-sign.html">Traffic Sign Recognition<br />
                                          Project</a></h2>
 									</header>
-									<a href="projekty/traffic-signs.html" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+									<a href="Projects/traffic-sign.html" class="image fit"><img src="images/Traffic-sign-recognition-system-in-cars-_-Body-2-16-8-23-1024x640.jpg" alt="Traffic Sign Recognition Project" /></a>
 									<p>A Python project using Convolutional Neural Networks to automatically identify traffic signs from images, achieving 95%+ accuracy</p>
 									<ul class="actions special">
-										<li><a href="projekty/traffic-signs.html" class="button">View Project</a></li>
+										<li><a href="Projects/traffic-sign.html" class="button">View Project</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">News Site Scraper<br />
+										<h2><a href="Projects/news-scraper.html">News Site Aggregator<br />
 										Project </a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>News Site Scraper is a project that automatically collects, analyzes, and stores the latest articles from selected news websites</p>
+									<a href="Projects/news-scraper.html" class="image fit"><img src="images/meta-image-redd.png" alt="News Site Aggregator Project" /></a>
+									<p>News Site Aggregator is a project that automatically collects, analyzes, and stores the latest articles from selected news websites</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Project</a></li>
+										<li><a href="Projects/news-scraper.html" class="button">View Project</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Auto Estate<br />
-										Genertor</a></h2>
+										<h2><a href="Projects/auto-estate.html">Auto Estate<br />
+										Generator</a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>Ingests real estate emails via Gmail, uses AI to extract and summarize content, engagement‑ready LinkedIn posts for Estate FM under 1,800 characters.</p>
+									<a href="Projects/auto-estate.html" class="image fit"><img src="images/1599457609166.png" alt="Auto Estate Generator Project" /></a>
+									<p>Automatic n8n pipeline that processes emails, decodes DOCX/HTML attachments, translates content using AI, and creates formatted posts in Notion for Estate FM.</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Project</a></li>
+										<li><a href="Projects/auto-estate.html" class="button">View Project</a></li>
 									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Election Data Cleaning<br />
+										<h2><a href="Projects/election-data.html">Election Data Cleaning<br />
 										Project </a></h2>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+									<a href="Projects/election-data.html" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
 									<p>I downloaded election results from various public sources, cleaned and standardized them, and prepared reproducible datasets for analysis in R Studio</p>
 									<ul class="actions special">
-										<li><a href="#" class="button">Project</a></li>
+										<li><a href="Projects/election-data.html" class="button">View Project</a></li>
 									</ul>
 								</article>
 
@@ -137,7 +155,7 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+						<ul><li>&copy; Mikolaj Pawel Sapek</li></ul>
 					</div>
 
 			</div>

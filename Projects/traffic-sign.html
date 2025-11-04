@@ -1,12 +1,185 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Traffic Sign Recognition Project</title>
+		<title>Traffic Sign Recognition Project - Mikolaj Pawel Sapek Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 </head>
-<body>
-    <h1>Project Page: Traffic Sign Recognition</h1>
-    <p>Project details will be added here.</p>
-    <a href="../index.html">Back to Home</a>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="../index.html" class="logo">Portfolio</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li><a href="../index.html">Projects</a></li>
+							<li class="active"><a href="traffic-sign.html">Traffic Sign Recognition</a></li>
+							<li><a href="../aboutme.html">About Me</a></li>
+							<li><a href="../cv.html">CV</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Post -->
+							<section class="post">
+								<header class="major">
+									<h1>Traffic Sign Recognition<br />
+									Project</h1>
+									<p>A convolutional neural network that classifies images of traffic signs into 43 categories using a custom-preprocessed dataset and Keras/TensorFlow, reaching about 96.9% test accuracy.</p>
+								</header>
+								<div class="image main"><img src="../images/Traffic-sign-recognition-system-in-cars-_-Body-2-16-8-23-1024x640.jpg" alt="Traffic Sign Recognition Project" /></div>
+								
+								<h2>Overview</h2>
+								<p>This project implements an end-to-end pipeline in Google Colab: mount Google Drive, load and resize images from 43 classes to 30×30 RGB, split into train/test, and train a CNN with Conv2D, MaxPool2D, Dropout, and Dense layers optimized with Adam. The goal is to practice a practical multi-class vision workflow relevant to autonomous driving while learning CNN training, evaluation, and error analysis.</p>
+								
+								<h2>Technology Stack</h2>
+								<p>The project leverages modern deep learning and data science tools:</p>
+								<ul>
+									<li><strong>Python</strong> - Core programming language</li>
+									<li><strong>Google Colab</strong> - Cloud-based development environment</li>
+									<li><strong>Google Drive integration</strong> - Data storage and access</li>
+									<li><strong>TensorFlow/Keras</strong> - Deep learning framework</li>
+									<li><strong>NumPy & Pandas</strong> - Data manipulation and analysis</li>
+									<li><strong>Pillow</strong> - Image processing</li>
+									<li><strong>Scikit-learn</strong> - Data splitting and encoding utilities</li>
+								</ul>
+
+								<h2>Key Features</h2>
+								<ul>
+									<li>Automated dataset extraction and class-folder ingestion for 43 labels</li>
+									<li>Preprocessing pipeline: resize to 30×30, array conversion, one-hot encoding</li>
+									<li>Compact CNN architecture: stacked 32- and 64-filter conv blocks, pooling, dropout, dense-256, softmax</li>
+									<li>Training with validation metrics and final test evaluation</li>
+									<li>Visualization of correct/incorrect predictions with confidence scores</li>
+								</ul>
+
+								<h2>Challenges & Solutions</h2>
+								<p>Throughout the project, several challenges were encountered and addressed:</p>
+								<ul>
+									<li><strong>Inconsistent dataset folders:</strong> Added robust checks and graceful skips to handle missing or corrupted files</li>
+									<li><strong>Overfitting on small images:</strong> Implemented multi-level dropout and validation monitoring to prevent overfitting</li>
+									<li><strong>Speed vs. accuracy trade-off:</strong> Optimized input size (30×30) and moderate filter counts for efficient training while maintaining high accuracy</li>
+								</ul>
+
+								<h2>Model Architecture</h2>
+								<p>The CNN model follows a compact yet effective design:</p>
+								<pre><code>model = keras.Sequential([
+    layers.Conv2D(32, (3,3), activation="relu", input_shape=(30, 30, 3)),
+    layers.Conv2D(32, (3,3), activation="relu"),
+    layers.MaxPooling2D((2,2)),
+    layers.Dropout(0.25),
+    
+    layers.Conv2D(64, (3,3), activation="relu"),
+    layers.Conv2D(64, (3,3), activation="relu"),
+    layers.MaxPooling2D((2,2)),
+    layers.Dropout(0.25),
+    
+    layers.Flatten(),
+    layers.Dense(256, activation="relu"),
+    layers.Dropout(0.5),
+    layers.Dense(43, activation="softmax")
+])
+
+model.compile(optimizer="adam",
+              loss="categorical_crossentropy",
+              metrics=["accuracy"])</code></pre>
+
+								<h2>Results & Outcomes</h2>
+								<p>The project achieved impressive results:</p>
+								<ul>
+									<li><strong>Validation accuracy:</strong> ~97.7% peak performance</li>
+									<li><strong>Test accuracy:</strong> ~96.92% final score</li>
+									<li><strong>Training stability:</strong> Stable loss decrease across 15 epochs with Adam optimizer</li>
+									<li><strong>Practical skills gained:</strong> Expertise in preprocessing, CNN design, diagnostics, and misclassification review</li>
+								</ul>
+
+								<h2>Project Highlights</h2>
+								<ul>
+									<li>~97% test accuracy with compact 30×30 inputs on 43 classes</li>
+									<li>Reproducible Colab workflow with Drive-mounted data</li>
+									<li>Misclassification visualization for targeted improvements</li>
+								</ul>
+
+								<h2>Visualizations</h2>
+								<div class="box alt">
+									<div class="row gtr-50 gtr-uniform">
+										<div class="col-12"><span class="image fit"><img src="../images/traffic-sign-training-metrics.jpg" alt="Training and Validation Accuracy and Loss" /></span></div>
+										<div class="col-12"><span class="image fit"><img src="../images/traffic-sign-predictions.jpg" alt="Prediction Results Grid" /></span></div>
+									</div>
+								</div>
+								<p><em>Left: Training and validation accuracy/loss curves over 15 epochs. Right: Prediction results grid showing correct and misclassified traffic signs with confidence scores.</em></p>
+
+								<h2>Download Project</h2>
+								<p>You can download the complete project notebook to explore the code and implementation:</p>
+								<ul class="actions special">
+									<li><a href="../files/Traffic_Sign_recognation_Project.ipynb" class="button large icon solid fa-download" download>Download Project Notebook</a></li>
+								</ul>
+
+								<ul class="actions special">
+									<li><a href="../index.html" class="button large">Back to Projects</a></li>
+								</ul>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>Copenhagen, Denmark<br />
+								</p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">miki.sapek@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							        <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							        <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Mikolaj Pawel Sapek</li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
 </body>
 </html>
