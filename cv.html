@@ -38,6 +38,81 @@
 				height: 60px;
 				object-fit: contain;
 			}
+			
+			/* Dark Mode Styles */
+			body.dark-mode {
+				background-color: #1a1a1a;
+				color: #e0e0e0;
+			}
+			
+			body.dark-mode #main {
+				background-color: #2a2a2a;
+				color: #e0e0e0;
+			}
+			
+			body.dark-mode #main > * {
+				border-top-color: #404040;
+			}
+			
+			body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+			body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
+				color: #ffffff;
+			}
+			
+			body.dark-mode a {
+				color: #e0e0e0;
+				border-bottom-color: rgba(224, 224, 224, 0.5);
+			}
+			
+			body.dark-mode a:hover {
+				color: #18bfef !important;
+			}
+			
+			body.dark-mode #header {
+				background-color: #1a1a1a;
+			}
+			
+			body.dark-mode #nav {
+				background-color: #1a1a1a;
+			}
+			
+			body.dark-mode #footer {
+				background-color: #1a1a1a;
+				color: #e0e0e0;
+			}
+			
+			body.dark-mode #copyright {
+				background-color: #1a1a1a;
+				color: #e0e0e0;
+			}
+			
+			body.dark-mode .button {
+				color: #ffffff !important;
+				border-color: #ffffff !important;
+				border-style: solid !important;
+				box-shadow: inset 0 0 0 2px #ffffff !important;
+			}
+			
+			body.dark-mode .button:hover {
+				background-color: #ffffff !important;
+				color: #1a1a1a !important;
+				border-color: #ffffff !important;
+				box-shadow: inset 0 0 0 2px #ffffff !important;
+			}
+			
+			body.dark-mode strong, body.dark-mode b {
+				color: #ffffff !important;
+			}
+			
+			/* Dark mode toggle button */
+			#dark-mode-toggle {
+				transition: transform 0.2s ease;
+				cursor: pointer;
+			}
+			
+			#dark-mode-toggle:hover {
+				transform: scale(1.1);
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -58,9 +133,11 @@
 							<li class="active"><a href="cv.html">CV</a></li>
 						</ul>
 						<ul class="icons">
-							<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+							<li><a href="https://www.linkedin.com/in/miko%C5%82aj-pawe%C5%82-sapek-8b5633267/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="https://www.facebook.com/profile.php?id=100009058364906" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li id="dark-mode-toggle" style="cursor: pointer; padding: 0.5em;">
+								<span class="icon solid fa-moon" id="dark-mode-icon"></span>
+							</li>
 						</ul>
 					</nav>
 
@@ -81,7 +158,7 @@
 								<p><strong>Email:</strong> <a href="mailto:miki.sapek@gmail.com">miki.sapek@gmail.com</a><br />
 								<strong>Phone:</strong> <a href="tel:+48507535615">+48 507 535 615</a><br />
 								<strong>Location:</strong> Copenhagen, Denmark<br />
-								<strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" target="_blank">linkedin.com/in/mikołaj-paweł-sapek-8b5633267</a></p>
+								<strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/miko%C5%82aj-pawe%C5%82-sapek-8b5633267/" target="_blank">linkedin.com/in/mikołaj-paweł-sapek-8b5633267</a></p>
 								
 								<hr />
 								
@@ -205,9 +282,8 @@
 							<section>
 								<h3>Social</h3>
 								<ul class="icons alt">
-									<li><a href="www.linkedin.com/in/mikołaj-paweł-sapek-8b5633267" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.linkedin.com/in/miko%C5%82aj-pawe%C5%82-sapek-8b5633267/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									<li><a href="https://www.facebook.com/profile.php?id=100009058364906" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
 								</ul>
 							</section>
 						</section>
@@ -228,6 +304,44 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<script>
+			// Smooth scroll dla całej strony
+			document.documentElement.style.scrollBehavior = 'smooth';
+
+			// Dark Mode Toggle
+			(function() {
+				const darkModeToggle = document.getElementById('dark-mode-toggle');
+				const darkModeIcon = document.getElementById('dark-mode-icon');
+				
+				// Check for saved theme preference or default to light mode
+				const currentTheme = localStorage.getItem('theme') || 'light';
+				
+				if (currentTheme === 'dark') {
+					document.body.classList.add('dark-mode');
+					if (darkModeIcon) {
+						darkModeIcon.classList.remove('fa-moon');
+						darkModeIcon.classList.add('fa-sun');
+					}
+				}
+				
+				if (darkModeToggle && darkModeIcon) {
+					darkModeToggle.addEventListener('click', function() {
+						document.body.classList.toggle('dark-mode');
+						
+						if (document.body.classList.contains('dark-mode')) {
+							localStorage.setItem('theme', 'dark');
+							darkModeIcon.classList.remove('fa-moon');
+							darkModeIcon.classList.add('fa-sun');
+						} else {
+							localStorage.setItem('theme', 'light');
+							darkModeIcon.classList.remove('fa-sun');
+							darkModeIcon.classList.add('fa-moon');
+						}
+					});
+				}
+			})();
+			</script>
 
 	</body>
 </html>
