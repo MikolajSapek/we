@@ -5,8 +5,8 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-<head>
-		<title>Traffic Sign Recognition Project - Mikolaj Pawel Sapek Portfolio</title>
+	<head>
+		<title>Public Data Aggregation Automation - Mikolaj Pawel Sapek Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32-rounded.png" />
@@ -90,7 +90,7 @@
 				transform: scale(1.1);
 			}
 		</style>
-</head>
+	</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -105,7 +105,7 @@
 					<nav id="nav">
 						<ul class="links">
 							<li><a href="../index.html">Projects</a></li>
-							<li class="active"><a href="traffic-sign.html">Traffic Sign Recognition</a></li>
+							<li class="active"><a href="public-data-automation.html">Public Data Aggregation</a></li>
 							<li><a href="../aboutme.html">About Me</a></li>
 							<li><a href="../cv.html">CV</a></li>
 						</ul>
@@ -124,97 +124,117 @@
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
-									<h1>Traffic Sign Recognition<br />
-									Project</h1>
-									<p>A convolutional neural network that classifies images of traffic signs into 43 categories using a custom-preprocessed dataset and Keras/TensorFlow, reaching about 96.9% test accuracy.</p>
+									<h1>Public Data Aggregation</h1>
+									<p>n8n-driven automation that gathers public source information, normalizes key fields, and delivers consistent datasets for market intelligence.</p>
 								</header>
-								<div class="image main"><img src="../images/Traffic-sign-recognition-system-in-cars-_-Body-2-16-8-23-1024x640.jpg" alt="Traffic Sign Recognition Project" /></div>
+								<div class="image main"><img src="../images/meta-image-redd.png" alt="Public Data Aggregation Platform" style="max-width: 70%; margin: 0 auto; display: block;" /></div>
 								
 								<h2>Overview</h2>
-								<p>This project implements an end-to-end pipeline in Google Colab: mount Google Drive, load and resize images from 43 classes to 30×30 RGB, split into train/test, and train a CNN with Conv2D, MaxPool2D, Dropout, and Dense layers optimized with Adam. The goal is to practice a practical multi-class vision workflow relevant to autonomous driving while learning CNN training, evaluation, and error analysis.</p>
+								<p>An automatic aggregation layer for real estate market monitoring that periodically collects narratives from curated public data sources, cleans HTML, extracts key fields using CSS selectors, and structures data through AI modules, then optionally delivers datasets to a backend API.</p>
+								<p>The workflow includes consolidating source listings, filtering by target market, fetching detailed content, parsing dates, merging streams, and producing unified output with leasing/sales/construction context ready for analytics.</p>
 								
 								<h2>Technology Stack</h2>
-								<p>The project leverages modern deep learning and data science tools:</p>
-								<ul>
-									<li><strong>Python</strong> - Core programming language</li>
-									<li><strong>Google Colab</strong> - Cloud-based development environment</li>
-									<li><strong>Google Drive integration</strong> - Data storage and access</li>
-									<li><strong>TensorFlow/Keras</strong> - Deep learning framework</li>
-									<li><strong>NumPy & Pandas</strong> - Data manipulation and analysis</li>
-									<li><strong>Pillow</strong> - Image processing</li>
-									<li><strong>Scikit-learn</strong> - Data splitting and encoding utilities</li>
+								<p>The project leverages n8n workflow automation and AI-powered data processing:</p>
+								</ul>
+									<li><strong>n8n Workflow Automation:</strong> Schedule Trigger, HTTP Request, HTML Extract, Merge, IF, Code (Node.js), Sticky Notes for in-flow documentation</li>
+									<li><strong>AI Parsing:</strong> gpt-4o-mini via n8n LangChain nodes, Structured Output Parser for consistent JSON</li>
+									<li><strong>CSS Selectors:</strong> Configurable selectors per source group for lists, detail pages, dates, titles, and content</li>
+									<li><strong>Backend Integration:</strong> Secure HTTP batching into internal aggregation endpoints</li>
 								</ul>
 
 								<h2>Key Features</h2>
 								<ul>
-									<li>Automated dataset extraction and class-folder ingestion for 43 labels</li>
-									<li>Preprocessing pipeline: resize to 30×30, array conversion, one-hot encoding</li>
-									<li>Compact CNN architecture: stacked 32- and 64-filter conv blocks, pooling, dropout, dense-256, softmax</li>
-									<li>Training with validation metrics and final test evaluation</li>
-									<li>Visualization of correct/incorrect predictions with confidence scores</li>
+									<li>Data harmonization from multiple public sources: fetching links, dates, locations, and content, then merging entries</li>
+									<li>Market filtering: regex-based link checks and location guards to maintain regional relevance</li>
+									<li>AI structuring: rigid JSON schemas for Property Type, Leasing, Sales, Construction, Certificates, and Market</li>
+									<li>Date normalization: conversions and time filters in Code nodes for rolling publication windows</li>
+								</ul>
+
+								<h2>Functionality</h2>
+								<p>The orchestration performs the following operations:</p>
+								<ul>
+									<li>Aggregating categorized lists across monitored public sources</li>
+									<li>Fetching detailed entries with full HTML payloads and extracting titles plus content</li>
+									<li>Deduplicating and merging data streams into a single table of records ready for internal distribution</li>
+									<li>Sending results to APIs in an established payload (title, content, date, category, link, market, leasing info)</li>
 								</ul>
 
 								<h2>Challenges & Solutions</h2>
-								<p>Throughout the project, several challenges were encountered and addressed:</p>
+								<p>Key challenges encountered and solutions implemented:</p>
 								<ul>
-									<li><strong>Inconsistent dataset folders:</strong> Added robust checks and graceful skips to handle missing or corrupted files</li>
-									<li><strong>Overfitting on small images:</strong> Implemented multi-level dropout and validation monitoring to prevent overfitting</li>
-									<li><strong>Speed vs. accuracy trade-off:</strong> Optimized input size (30×30) and moderate filter counts for efficient training while maintaining high accuracy</li>
+									<li><strong>Different DOM structures and selectors:</strong> Created separate HTML Extract paths per source type with clear selectors for links, dates, and content</li>
+									<li><strong>Noise and missing data:</strong> AI Output Parser enforces complete structure with empty fields to avoid breaking downstream schema</li>
+									<li><strong>Dates in local formats:</strong> Code nodes normalize ranges and filter rolling windows with localized month names</li>
+									<li><strong>Incorrect categorization:</strong> Prompt rules and keywords limit hallucinations and enforce caution in assignments</li>
 								</ul>
 
-								<h2>Model Architecture</h2>
-								<p>The CNN model follows a compact yet effective design:</p>
-								<pre><code>model = keras.Sequential([
-    layers.Conv2D(32, (3,3), activation="relu", input_shape=(30, 30, 3)),
-    layers.Conv2D(32, (3,3), activation="relu"),
-    layers.MaxPooling2D((2,2)),
-    layers.Dropout(0.25),
-    
-    layers.Conv2D(64, (3,3), activation="relu"),
-    layers.Conv2D(64, (3,3), activation="relu"),
-    layers.MaxPooling2D((2,2)),
-    layers.Dropout(0.25),
-    
-    layers.Flatten(),
-    layers.Dense(256, activation="relu"),
-    layers.Dropout(0.5),
-    layers.Dense(43, activation="softmax")
-])
+								<h2>Code Example</h2>
+								<p>Date filtering logic for entries published in the previous day (Polish month names). Click below to view the code:</p>
+								
+								<details>
+									<summary style="cursor: pointer; font-weight: bold; margin: 1em 0; padding: 0.5em; background: #f4f4f4; border-radius: 4px;">Click to expand Code Example</summary>
+									<pre style="margin-top: 1em;"><code>// Filter: entries from the previous day (PL months)
+const currentDate = new Date();
+const previousDay = new Date();
+previousDay.setDate(currentDate.getDate() - 1);
+previousDay.setHours(0,0,0,0);
 
-model.compile(optimizer="adam",
-              loss="categorical_crossentropy",
-              metrics=["accuracy"])</code></pre>
+const endOfPreviousDay = new Date(previousDay);
+endOfPreviousDay.setHours(23,59,59,999);
+
+const months = ["stycznia","lutego","marca","kwietnia","maja","czerwca",
+                "lipca","sierpnia","września","października","listopada","grudnia"];
+
+const fmt = d => `${d.getDate().toString().padStart(2,'0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
+
+console.log("Checking entries from:", fmt(previousDay));
+
+const filtered = items.filter(it => {
+  const s = it.json["Date"];
+  if (!s) return false;
+  const [d, m, y] = s.trim().split(" ");
+  const mi = months.indexOf(m.toLowerCase());
+  const dt = new Date(parseInt(y), mi, parseInt(d));
+  return dt >= previousDay && dt <= endOfPreviousDay;
+});
+
+return filtered.map(it => ({ json: { date: it.json["Date"], link: it.json["Link"] } }));
+</code></pre>
+								</details>
 
 								<h2>Results & Outcomes</h2>
-								<p>The project achieved impressive results:</p>
+								<p>The project delivers significant value:</p>
 								<ul>
-									<li><strong>Validation accuracy:</strong> ~97.7% peak performance</li>
-									<li><strong>Test accuracy:</strong> ~96.92% final score</li>
-									<li><strong>Training stability:</strong> Stable loss decrease across 15 epochs with Adam optimizer</li>
-									<li><strong>Practical skills gained:</strong> Expertise in preprocessing, CNN design, diagnostics, and misclassification review</li>
+									<li>Consistent JSON for analysis: each record has title, date, link, category, market, and Leasing/Sales/Construction sections</li>
+									<li>Reduction of manual work: automation of public data processing and metadata extraction ready for CRM/Notion/DB</li>
+									<li>Stable pipeline: harmonization of selectors and parsers minimizes errors when layout changes occur</li>
 								</ul>
 
 								<h2>Project Highlights</h2>
 								<ul>
-									<li>~97% test accuracy with compact 30×30 inputs on 43 classes</li>
-									<li>Reproducible Colab workflow with Drive-mounted data</li>
-									<li>Misclassification visualization for targeted improvements</li>
+									<li>Rigid structured output schemas with complete field order, zero missing structure</li>
+									<li>Location filters and regex tuned for region-specific public signals</li>
+									<li>Multi-source merge, batch POST to API, and preparation for nightly scheduling</li>
 								</ul>
+
+								<h2>Use Cases</h2>
+								<p>This tool is valuable for:</p>
+								<ul>
+									<li>Daily market intelligence feeds for internal dashboards</li>
+									<li>Automatic entries to CMS/Notion with ready transaction fields</li>
+									<li>Monitoring leasing/sales/construction for research and market reports</li>
+								<ul>
 
 								<h2>Visualizations</h2>
 								<div class="box alt">
 									<div class="row gtr-50 gtr-uniform">
-										<div class="col-12"><span class="image fit"><img src="../images/traffic-sign-training-metrics.jpg" alt="Training and Validation Accuracy and Loss" /></span></div>
-										<div class="col-12"><span class="image fit"><img src="../images/traffic-sign-predictions.jpg" alt="Prediction Results Grid" /></span></div>
+										<div class="col-12">
+											<h3>n8n Workflow Diagram - Public Data Aggregation</h3>
+											<p><em>Complete workflow showing monitored source branches, merge, enrichment, and output stages</em></p>
+											<span class="image fit"><img src="../images/Screenshot 2025-11-08 at 13.01.14.png" alt="n8n Workflow Diagram - Public Data Aggregation" style="max-width: 70%; margin: 0 auto; display: block;" /></span>
+										</div>
 									</div>
 								</div>
-								<p><em>Left: Training and validation accuracy/loss curves over 15 epochs. Right: Prediction results grid showing correct and misclassified traffic signs with confidence scores.</em></p>
-
-								<h2>Download Project</h2>
-								<p>You can download the complete project notebook to explore the code and implementation:</p>
-								<ul class="actions special">
-									<li><a href="../files/Traffic_Sign_recognation_Project.ipynb" class="button large icon solid fa-download" download>Download Project Notebook</a></li>
-								</ul>
 
 								<ul class="actions special">
 									<li><a href="../index.html" class="button large">Back to Projects</a></li>
@@ -301,3 +321,4 @@ model.compile(optimizer="adam",
 
 	</body>
 </html>
+

@@ -9,6 +9,9 @@
 		<title>Election Data Cleaning Project - Mikolaj Pawel Sapek Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32-rounded.png" />
+		<link rel="icon" type="image/png" sizes="64x64" href="../favicon-64-rounded.png" />
+		<link rel="shortcut icon" type="image/png" href="../favicon-32-rounded.png" />
 		<link rel="stylesheet" href="../assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 		<style>
@@ -123,76 +126,175 @@
 								<header class="major">
 									<h1>Election Data Cleaning<br />
 									Project</h1>
-									<p>I downloaded election results from various public sources, cleaned and standardized them, and prepared reproducible datasets for analysis in R Studio</p>
+									<p>Built a robust RStudio pipeline to clean, standardize, and merge granular PKW election records into a consistent, county-level analytics dataset across both rounds of Poland's 2020 presidential election.</p>
 								</header>
-								<div class="image main"><img src="../images/pic05.jpg" alt="" /></div>
-								<h2>Overview</h2>
-								<p>This project involved collecting election data from multiple public sources, cleaning and standardizing the information, and creating reproducible datasets ready for statistical analysis in R Studio. The work ensures data quality and consistency for reliable election research.</p>
 								
+								<h2>Overview</h2>
+								<p>This project consolidated raw precinct/commission CSV exports from PKW (Polish National Electoral Commission) into a harmonized county-level dataset, ensuring consistent schemas, clean geographic keys, and reproducible transformations in RStudio for downstream analysis and mapping.</p>
+								<p>The workflow covered schema alignment, text normalization, deduplication, outlier handling, and multi-table joins, followed by turnout and candidate-share calculations for round one and round two, statistical testing, and geospatial visualization using <code>sf</code> and <code>ggplot2</code>.</p>
+								
+								<h2>Technology Stack</h2>
+								<p>The project leverages RStudio environment with comprehensive data science libraries:</p>
+								<ul>
+									<li><strong>R & RStudio:</strong> Primary development environment for data processing and analysis</li>
+									<li><strong>dplyr:</strong> Data manipulation and transformation pipelines</li>
+									<li><strong>tidyr:</strong> Data tidying and reshaping operations</li>
+									<li><strong>readr:</strong> Efficient CSV data import and parsing</li>
+									<li><strong>ggplot2:</strong> Advanced data visualization and mapping</li>
+									<li><strong>sf:</strong> Geospatial data handling and spatial joins</li>
+									<li><strong>scales:</strong> Formatting and scaling for visualizations</li>
+									<li><strong>knitr:</strong> Reproducible research and documentation</li>
+								</ul>
+
+								<h2>Data Structures and Modeling Skills</h2>
+								
+								<h3>Tabular Design</h3>
+								<p>Enforced column classes, aligned factor/character usage, and validated rectangular integrity for joins and summaries. Worked with data frames and tibbles to ensure type-stable operations across multi-round datasets.</p>
+								
+								<h3>Vectors, Factors, and Lists</h3>
+								<p>Used typed vectors for numeric vote counts, factors/characters for territorial labels, and list-like outputs in grouped operations, ensuring type-stable pipelines throughout the transformation process.</p>
+								
+								<h3>2D Structures and Joins</h3>
+								<p>Executed left/inner joins across multi-key pairs (Powiat, Województwo), with lowercased canonical keys and collision checks to preserve referential integrity across election rounds.</p>
+
+								<h2>Core Transformations</h2>
+								
+								<h3>Standardization</h3>
+								<p>Unified naming conventions, lowercased territorial keys, filtered non-territorial rows (e.g., Zagranica, Statki), and reconciled column sets across rounds to a single tidy schema. This ensured consistent geographic identifiers for reliable joins and aggregations.</p>
+								
+								<h3>Aggregations and Metrics</h3>
+								<p>Computed turnout per round, candidate percentages, and county-level deltas between rounds. Created above/below-average cohorts for comparative testing, enabling identification of regions with significant turnout changes.</p>
+								
+								<h3>Deduplication and Quality Control</h3>
+								<p>Handled duplicate records, missing values, and outliers through systematic validation checks. Ensured vote totals consistency across aggregation levels and verified geographic key integrity.</p>
+
+								<h2>Statistical Testing and Modeling</h2>
+								<p>Conducted comprehensive statistical analysis to explore relationships in the election data:</p>
+								<ul>
+									<li><strong>Group Comparisons:</strong> Ran t-tests comparing turnout changes between above-average and below-average cohorts</li>
+									<li><strong>Linear Modeling:</strong> Fitted a linear model linking first-round support to turnout change to explore association strength and direction</li>
+									<li><strong>Hypothesis Testing:</strong> Evaluated statistical significance of observed patterns and differences between election rounds</li>
+								</ul>
+
+								<h2>Geospatial Integration</h2>
+								
+								<h3>Spatial Joins with sf</h3>
+								<p>Matched county attributes to GeoJSON geometries via normalized keys, enabling winner choropleths, continuous support gradients, and turnout-change maps. This spatial integration allowed for visual analysis of geographic patterns in voting behavior.</p>
+								
+								<h3>Visual Analytics with ggplot2</h3>
+								<p>Produced county-level choropleths, faceted comparisons across voivodeships, and slope charts tracing support flows between rounds. Visualizations highlighted regional patterns and electoral dynamics.</p>
+
 								<h2>Key Features</h2>
 								<ul>
-									<li>Data collection from multiple public sources</li>
-									<li>Comprehensive data cleaning and standardization</li>
-									<li>Handling of inconsistent formats and missing values</li>
-									<li>Data validation and quality checks</li>
-									<li>Preparation of reproducible datasets</li>
-									<li>Documentation of data processing steps</li>
+									<li><strong>Robust Data Pipeline:</strong> End-to-end processing from raw CSV exports to analysis-ready datasets</li>
+									<li><strong>Schema Harmonization:</strong> Consistent data structure across multiple election rounds</li>
+									<li><strong>Geographic Key Standardization:</strong> Normalized territorial identifiers for reliable joins</li>
+									<li><strong>Multi-round Analysis:</strong> Comparative analysis across both rounds of the presidential election</li>
+									<li><strong>Statistical Modeling:</strong> Hypothesis testing and regression analysis</li>
+									<li><strong>Geospatial Visualization:</strong> Interactive maps and choropleths for visual insights</li>
+									<li><strong>Reproducible Workflow:</strong> Version-controlled scripts with clear documentation</li>
 								</ul>
 
-								<h2>Technology Stack</h2>
-								<p>The project utilizes data science and statistical tools:</p>
-								<ul>
-									<li>R and R Studio</li>
-									<li>Python for data collection and preprocessing</li>
-									<li>Web scraping tools for data acquisition</li>
-									<li>Data manipulation libraries (dplyr, tidyr)</li>
-									<li>Data validation frameworks</li>
-									<li>Reproducible research tools (R Markdown)</li>
-								</ul>
-
-								<h2>Data Processing Steps</h2>
-								<p>The project followed a systematic approach:</p>
+								<h2>Functionality</h2>
+								<p>The pipeline performs comprehensive data processing operations:</p>
 								<ol>
-									<li><strong>Data Collection:</strong> Downloading election results from various official sources</li>
-									<li><strong>Data Import:</strong> Loading data from multiple formats (CSV, Excel, PDF)</li>
-									<li><strong>Data Cleaning:</strong> Removing inconsistencies, handling missing values, correcting errors</li>
-									<li><strong>Standardization:</strong> Uniform formatting of dates, names, and numerical values</li>
-									<li><strong>Data Validation:</strong> Cross-checking totals and ensuring data integrity</li>
-									<li><strong>Dataset Preparation:</strong> Creating clean, analysis-ready datasets</li>
-									<li><strong>Documentation:</strong> Recording all transformation steps for reproducibility</li>
+									<li><strong>Data Import:</strong> Loading raw PKW CSV exports from multiple sources</li>
+									<li><strong>Schema Alignment:</strong> Reconciling column structures across different data sources</li>
+									<li><strong>Text Normalization:</strong> Standardizing geographic names and identifiers</li>
+									<li><strong>Data Cleaning:</strong> Removing non-territorial entries, handling missing values, correcting errors</li>
+									<li><strong>Key Standardization:</strong> Creating canonical geographic keys for reliable joins</li>
+									<li><strong>Multi-table Joins:</strong> Merging datasets from both election rounds</li>
+									<li><strong>Aggregation:</strong> Computing county-level statistics from precinct data</li>
+									<li><strong>Metric Calculation:</strong> Calculating turnout, candidate shares, and round-to-round changes</li>
+									<li><strong>Spatial Integration:</strong> Joining electoral data with geographic boundaries</li>
+									<li><strong>Visualization:</strong> Generating maps and statistical plots</li>
 								</ol>
 
-								<h2>Challenges Addressed</h2>
-								<p>Key challenges overcome in this project:</p>
+								<h2>Challenges & Solutions</h2>
+								<p>Key challenges encountered and solutions implemented:</p>
 								<ul>
-									<li>Inconsistent data formats across different sources</li>
-									<li>Missing or incomplete records</li>
-									<li>Varying naming conventions and coding schemes</li>
-									<li>Data quality issues and outliers</li>
-									<li>Ensuring reproducibility of data processing steps</li>
+									<li><strong>Inconsistent Schemas:</strong> Created mapping functions to align column structures across rounds and sources, ensuring a unified data model</li>
+									<li><strong>Geographic Key Variations:</strong> Implemented normalization pipeline with lowercasing and canonical name resolution to enable reliable joins</li>
+									<li><strong>Non-territorial Records:</strong> Filtered out records like "Zagranica" and "Statki" that don't represent actual counties</li>
+									<li><strong>Data Quality Issues:</strong> Implemented validation checks for vote totals and outlier detection</li>
+									<li><strong>Missing Values:</strong> Systematic handling of incomplete records with appropriate imputation strategies</li>
+									<li><strong>Referential Integrity:</strong> Verified key consistency across joins to prevent data loss or duplication</li>
 								</ul>
 
-								<h2>Outcomes</h2>
-								<p>The cleaned datasets enable:</p>
+								<h2>Code Example</h2>
+								<p>Geographic key normalization and spatial join. Click below to view the code:</p>
+								
+								<details>
+									<summary style="cursor: pointer; font-weight: bold; margin: 1em 0; padding: 0.5em; background: #f4f4f4; border-radius: 4px;">Click to expand Code Example</summary>
+									<pre style="margin-top: 1em;"><code># Normalize geographic keys for reliable joins
+library(dplyr)
+library(sf)
+
+# Lowercase and standardize county names
+election_data <- election_data %>%
+  mutate(
+    powiat_normalized = tolower(str_trim(Powiat)),
+    wojewodztwo_normalized = tolower(str_trim(Województwo))
+  ) %>%
+  filter(
+    !powiat_normalized %in% c("zagranica", "statki")  # Remove non-territorial
+  )
+
+# Spatial join with geographic boundaries
+counties_sf <- st_read("data/powiaty.geojson") %>%
+  mutate(
+    powiat_normalized = tolower(str_trim(name))
+  )
+
+# Join electoral data with spatial data
+election_spatial <- election_data %>%
+  left_join(counties_sf, by = "powiat_normalized")
+
+# Calculate turnout metrics
+election_summary <- election_spatial %>%
+  group_by(powiat_normalized) %>%
+  summarise(
+    turnout_round1 = sum(votes_round1) / sum(eligible_voters),
+    turnout_round2 = sum(votes_round2) / sum(eligible_voters),
+    turnout_change = turnout_round2 - turnout_round1,
+    winner_round1 = names(which.max(votes_candidate1_round1)),
+    winner_round2 = names(which.max(votes_candidate2_round2))
+  )</code></pre>
+								</details>
+
+								<h2>Results & Outcomes</h2>
+								<p>The project successfully delivered:</p>
 								<ul>
-									<li>Reliable statistical analysis in R Studio</li>
-									<li>Reproducible research workflows</li>
-									<li>Comparative analysis across different election periods</li>
-									<li>Data-driven insights and visualizations</li>
-									<li>Future research and analysis capabilities</li>
+									<li><strong>Harmonized Dataset:</strong> Clean, county-level dataset ready for analysis across both election rounds</li>
+									<li><strong>Reproducible Pipeline:</strong> Version-controlled R scripts with clear documentation</li>
+									<li><strong>Statistical Insights:</strong> Identified patterns in turnout changes and candidate support</li>
+									<li><strong>Geospatial Visualizations:</strong> Maps revealing regional electoral patterns and dynamics</li>
+									<li><strong>Quality Assurance:</strong> Validated data integrity through systematic checks</li>
+									<li><strong>Research Foundation:</strong> Dataset enabling further academic and analytical research</li>
 								</ul>
 
-								<h2>Best Practices</h2>
-								<p>This project demonstrates:</p>
+								<h2>Project Highlights</h2>
 								<ul>
-									<li>Systematic data cleaning methodologies</li>
-									<li>Reproducible data science workflows</li>
-									<li>Quality assurance in data processing</li>
-									<li>Comprehensive documentation practices</li>
-									<li>Integration of multiple data sources</li>
+									<li>Processed PKW precinct-level results into a clean, county-level dataset</li>
+									<li>Demonstrated strong command of R data structures (vectors, factors, data frames)</li>
+									<li>Implemented robust joining across multi-key geographic hierarchies</li>
+									<li>Delivered reliable, reproducible insights through statistical and geospatial analysis</li>
+									<li>Created comprehensive visualizations using ggplot2 and sf</li>
 								</ul>
+
+								<h2>Visualizations</h2>
+								<p>The project produced several key visualizations:</p>
+								<ul>
+									<li><strong>County-Level Choropleths:</strong> Maps showing winner distribution and vote shares across regions</li>
+									<li><strong>Turnout Change Maps:</strong> Visual representation of increases/decreases in voter participation between rounds</li>
+									<li><strong>Faceted Comparisons:</strong> Side-by-side analysis across voivodeships</li>
+									<li><strong>Slope Charts:</strong> Tracing candidate support flows between election rounds</li>
+									<li><strong>Statistical Plots:</strong> Visualizations of regression results and hypothesis tests</li>
+								</ul>
+								<div class="image fit"><img src="../images/2020_Polish_presidential_election_-_2nd_round_results.png" alt="Election Data Visualization - Poland Election Results Map" style="max-width: 60%; margin: 0 auto; display: block;" /></div>
 
 								<ul class="actions special">
+									<li><a href="../files/Election 2020.R" class="button large" download>Download Data</a></li>
 									<li><a href="../index.html" class="button large">Back to Projects</a></li>
 								</ul>
 							</section>
